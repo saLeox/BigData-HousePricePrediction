@@ -1,0 +1,1 @@
+C:\SoftWare\developUtil\spark-2.4.7-bin-hadoop2.7\bin\spark-submit --class gof5.spark.WordCount --master local D:\Code\Personal\spark\target\spark-0.0.1-SNAPSHOT.jar D:\Code\Personal\spark\src\main\resources\spark_example.txt
