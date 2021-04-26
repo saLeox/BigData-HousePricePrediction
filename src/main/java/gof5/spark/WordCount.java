@@ -20,14 +20,15 @@ public class WordCount {
 
     public static void main(String[] args) throws Exception {
         if (args.length < 1) {
-            System.err.println("Usage: JavaWordCount <file>");
-            log.error("Usage: JavaWordCount <file>");
+            log.error("Variable lacks in JavaWordCount: Input file");
             System.exit(1);
         }
+        String inputFile = args[0];
+
         SparkConf sparkConf = new SparkConf().setAppName("JavaWordCount")
             .setMaster("local");
         JavaSparkContext ctx = new JavaSparkContext(sparkConf);
-        JavaRDD<String> lines = ctx.textFile(args[0], 1);
+        JavaRDD<String> lines = ctx.textFile(inputFile, 1);
 
         JavaRDD<String> words = lines.flatMap(s -> Arrays.asList(SPACE.split(s)).iterator());
         JavaPairRDD<String, Integer> wordAsTuple = words.mapToPair(word -> new Tuple2<>(word, 1));
@@ -38,5 +39,6 @@ public class WordCount {
              log.info(tuple._1() + ": " + tuple._2());
         }
         ctx.stop();
+        ctx.close();
     }
 }
