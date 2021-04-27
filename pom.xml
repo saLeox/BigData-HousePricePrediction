@@ -40,6 +40,37 @@
 		    <version>2.4.7</version>
 		    <scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>2.7.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.cloud.bigdataoss</groupId>
+			<artifactId>util-hadoop</artifactId>
+			<version>1.6.1-hadoop2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.cloud.bigdataoss</groupId>
+			<artifactId>bigquery-connector</artifactId>
+			<version>0.10.2-hadoop2</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>jackson-core</artifactId>
+					<groupId>com.fasterxml.jackson.core</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jackson-databind</artifactId>
+					<groupId>com.fasterxml.jackson.core</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jackson-annotations</artifactId>
+					<groupId>com.fasterxml.jackson.core</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 	</dependencies>
 
