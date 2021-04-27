@@ -18,6 +18,7 @@ MLlib sample refer to [here](https://github.com/saLeox/BigData-HousePricePredict
  - [x] Machine Learning training with *LinearRegression*, *DecisionTree*,  *RandomForests*, *GradientBoostedTrees*.  Main entrance go to [here](https://github.com/saLeox/BigData-HousePricePrediction/blob/main/src/main/java/gof5/spark/HousePricePredictML.java). To achieve the reusability and low decoupling, we apply **Stratefy Pattern** and **Templeate Pattern**, detail please refer to the [folder](https://github.com/saLeox/BigData-HousePricePrediction/tree/main/src/main/java/gof5/spark/regression/strategy).
 
 	***Reference***:
+	
 	https://spark.apache.org/docs/2.4.7/mllib-classification-regression.html
 	
 	https://spark.apache.org/docs/2.4.7/ml-classification-regression.html
