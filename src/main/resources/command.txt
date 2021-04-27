@@ -1,7 +1,6 @@
-## wordCount command, one variable
-## remember to change path
 C:\SoftWare\developUtil\spark-2.4.7-bin-hadoop2.7\bin\spark-submit --class gof5.spark.WordCount --master local D:\Code\Personal\BigData-HousePricePrediction\target\spark-0.0.1-SNAPSHOT.jar D:\Code\Personal\BigData-HousePricePrediction\src\main\resources\spark_example.txt
 
-## MLlib demo command, two variables
-## remember to change path
+
 C:\SoftWare\developUtil\spark-2.4.7-bin-hadoop2.7\bin\spark-submit --class gof5.spark.MachineLearningApp --master local D:\Code\Personal\BigData-HousePricePrediction\target\spark-0.0.1-SNAPSHOT.jar D:\Code\Personal\BigData-HousePricePrediction\src\main\resources\iris.data D:\Code\Personal\BigData-HousePricePrediction\src\main\resources\model\logistic-regression
+
+
