@@ -25,9 +25,13 @@ MLlib sample refer to [here](https://github.com/saLeox/BigData-HousePricePredict
 	 - Evaluation Metrics: 
 
 		> Mean Squared Error (MSE)
+		
 		>Root Mean Squared Error (RMSE)
+		
 		>Mean Absoloute Error (MAE)
+		
 		>Coefficient of Determination (R2)
+		
 		>Explained Variance
 
 
