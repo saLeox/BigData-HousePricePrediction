@@ -13,7 +13,7 @@ MLlib sample refer to [here](https://github.com/saLeox/BigData-HousePricePredict
 ## *Here We Go*
 
  - [x] Data Analysis Exploration, Cleaning & Preparation, and Feature
-              Selection refer [here](https://nbviewer.jupyter.org/github/saLeox/BigData-HousePricePrediction/blob/main/src/main/resources/Team1_Data-Analytics.ipynb).  The result can be found in the [Github Repo @suravimandal](https://github.com/suravimandal/team1_big_data).
+              Selection refer [here](https://nbviewer.jupyter.org/github/suravimandal/Team1_Data_Analytics/blob/master/Team1_Data-Pipeline.ipynb).  The result can be found in the [Github Repo @suravimandal](https://github.com/suravimandal/team1_big_data).
 
 
 
