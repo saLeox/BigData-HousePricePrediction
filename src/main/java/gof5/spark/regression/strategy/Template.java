@@ -5,23 +5,24 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.spark.api.java.JavaPairRDD;
-import org.apache.spark.mllib.evaluation.MulticlassMetrics;
+import org.apache.spark.mllib.evaluation.RegressionMetrics;
 import org.slf4j.LoggerFactory;
 
 public abstract class Template {
 	private static final org.slf4j.Logger log = LoggerFactory.getLogger(Template.class);
 
+	// refer to https://spark.apache.org/docs/1.6.3/mllib-evaluation-metrics.html
 	public void ModelEvaluate(JavaPairRDD<Object, Object> rdd) {
-		// 1 Accuracy
-		MulticlassMetrics metrics = new MulticlassMetrics(rdd.rdd());
-		double accuracy = metrics.accuracy();
-		log.info("Model Accuracy on Test Data: " + accuracy);
-		// 2 Mean Squared Error
-		double MSE = rdd.mapToDouble(pair -> {
-			double diff = (Double) pair._1() - (Double) pair._2();
-			return diff * diff;
-		}).mean();
-		log.info("Mean Squared Error = " + MSE);
+		RegressionMetrics metrics = new RegressionMetrics(rdd.rdd());
+		// Squared error
+		log.info("MSE = {}", metrics.meanSquaredError());
+		log.info("RMSE = {}", metrics.rootMeanSquaredError());
+		// R-squared
+		log.info("R Squared = {}", metrics.r2());
+		// Mean absolute error
+		log.info("MAE = {}", metrics.meanAbsoluteError());
+		// Explained variance
+		log.info("Explained Variance = {}", metrics.explainedVariance());
 	}
 
 	public void outputPrepare(String outputPath) {

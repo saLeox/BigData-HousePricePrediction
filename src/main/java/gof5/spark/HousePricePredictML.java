@@ -73,8 +73,9 @@ public class HousePricePredictML {
 		JavaRDD<LabeledPoint> testData = splits[1];
 
 		// 6. Modeling
-		// 6.1 - LinearRegressionWithSGD
 		String basePath = "D:\\Code\\Personal\\BigData-HousePricePrediction\\src\\main\\resources\\model\\";
+
+		// 6.1 - LinearRegressionWithSGD
 		String output_lr = basePath + "LinearRegressionWithSGD";
 		log.info("LRStrategy Model");
 		LinearRegressionStrategy lrStrategy = new LinearRegressionStrategy();
