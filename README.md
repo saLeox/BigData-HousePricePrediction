@@ -22,7 +22,7 @@ MLlib sample refer to [here](https://github.com/saLeox/BigData-HousePricePredict
 	   Pattern** and **Templeate Pattern**, detail please refer to the
 	   [folder](https://github.com/saLeox/BigData-HousePricePrediction/tree/main/src/main/java/gof5/spark/regression/strategy).
 
-	 - Evaluation Metrics: 
+	 - Evaluation Metrics, implementation is [here](https://github.com/saLeox/BigData-HousePricePrediction/blob/main/src/main/java/gof5/spark/regression/strategy/Template.java): 
 
 			Mean Squared Error (MSE)
 			Root Mean Squared Error (RMSE)
