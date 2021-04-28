@@ -72,6 +72,30 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.cloud.spark</groupId>
+			<artifactId>spark-bigquery-with-dependencies_2.12</artifactId>
+			<version>0.17.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava-jdk5</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>failureaccess</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>listenablefuture</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 	</dependencies>
 
     <build>
