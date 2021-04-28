@@ -37,7 +37,7 @@ public class HousePricePredictML {
 				.set("spark.driver.memory", "3g");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 
-		if(args[0] != null && args[0].equals("gcp")){
+		if("gcp".equals(args[0])){
 			SparkSession spark = SparkSession.builder().appName("Main").getOrCreate();
 			Dataset<Row> rows = spark.read().format("bigquery").option("table", "1111.X_train").load().cache();
 			for(String c: rows.columns()){
@@ -53,7 +53,7 @@ public class HousePricePredictML {
 				input.append((r.getString(r.length()-1)));
 
 				String rowString = input.toString();
-				log.info("rowstring"+rowString);
+				//log.info("rowstring"+rowString);
 				return rowString;
 			});
 
@@ -67,7 +67,7 @@ public class HousePricePredictML {
 			}
 			builder.append(rowList.get(rowList.size()-1).getString(0));
 			header=builder.toString();
-			log.info("header"+header);
+			//log.info("header"+header);
 		}
 		else {
 
@@ -121,6 +121,10 @@ public class HousePricePredictML {
 
 		// 6. Modeling
 		String basePath = "D:\\Code\\Personal\\BigData-HousePricePrediction\\src\\main\\resources\\model\\";
+
+		if("gcp".equals(args[0])){
+			basePath = "gs://machine-learning-model-swe5003/";
+		}
 
 		// 6.1 - LinearRegressionWithSGD
 		String output_lr = basePath + "LinearRegressionWithSGD";
