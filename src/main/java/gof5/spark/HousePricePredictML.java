@@ -1,5 +1,6 @@
 package gof5.spark;
 
+import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
@@ -11,6 +12,9 @@ import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
 import org.apache.spark.mllib.stat.MultivariateStatisticalSummary;
 import org.apache.spark.mllib.stat.Statistics;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
 import org.slf4j.LoggerFactory;
 
 import gof5.spark.regression.strategy.DecisionTreeStrategy;
@@ -24,22 +28,64 @@ public class HousePricePredictML {
 
 	public static void main(String[] args) {
 
-		String inputFile = "D:\\Code\\Personal\\Team1_Data_Analytics\\selected.csv";
-
 		// 1. Setting the Spark Context
+		// 2. Loading the Data-set
+
+		JavaRDD<String> data;
+		String header;
 		SparkConf conf = new SparkConf().setAppName("Main").setMaster("local[2]").set("spark.executor.memory", "3g")
 				.set("spark.driver.memory", "3g");
 		JavaSparkContext sc = new JavaSparkContext(conf);
-		Logger.getLogger("org").setLevel(Level.OFF);
-		Logger.getLogger("akka").setLevel(Level.OFF);
 
-		// 2. Loading the Data-set
-		JavaRDD<String> data = sc.textFile(inputFile);
-		final String header = data.first();
+		if(args[0] != null && args[0].equals("gcp")){
+			SparkSession spark = SparkSession.builder().appName("Main").getOrCreate();
+			Dataset<Row> rows = spark.read().format("bigquery").option("table", "1111.X_train").load().cache();
+			for(String c: rows.columns()){
+				rows = rows.withColumn(c, rows.col(c).cast("String"));
+			}
+
+			data = rows.toJavaRDD().map(r -> {
+				StringBuilder input = new StringBuilder();
+				//take 1 column to last column
+				for(int i=1; i<r.length()-1; i++){
+					input.append((r.getString(i))).append(",");
+				}
+				input.append((r.getString(r.length()-1)));
+
+				String rowString = input.toString();
+				log.info("rowstring"+rowString);
+				return rowString;
+			});
+
+			List<Row> rowList = rows.collectAsList();
+			StringBuilder builder = new StringBuilder();
+			for(int i=0; i<rowList.size()-1; i++){
+				//take only 1 column
+				String label=rowList.get(i).getString(0);
+				builder.append(label).append(",");
+
+			}
+			builder.append(rowList.get(rowList.size()-1).getString(0));
+			header=builder.toString();
+			log.info("header"+header);
+		}
+		else {
+
+			Logger.getLogger("org").setLevel(Level.OFF);
+			Logger.getLogger("akka").setLevel(Level.OFF);
+
+			String inputFile = "D:\\Code\\Personal\\Team1_Data_Analytics\\selected.csv";
+
+			data = sc.textFile(inputFile);
+			header = data.first();
+		}
+
+
 
 		// 3. Exploratory Data Analysis
 		// 3.1. Creating Vector of Input Data
-		JavaRDD<Vector> inputData = data.filter(line -> !line.equals(header)).map(line -> {
+		String finalHeader1 = header;
+		JavaRDD<Vector> inputData = data.filter(line -> !line.equals(finalHeader1)).map(line -> {
 			String[] parts = line.split(",");
 			double[] v = new double[parts.length - 1];
 			for (int i = 0; i < parts.length - 1; i++) {
@@ -58,7 +104,8 @@ public class HousePricePredictML {
 
 		// 4. Data Preparation
 		// 4.1 Creating LabeledPoint of Input and Output Data
-		JavaRDD<LabeledPoint> parsedData = data.filter(line -> !line.equals(header)).map(line -> {
+		String finalHeader = header;
+		JavaRDD<LabeledPoint> parsedData = data.filter(line -> !line.equals(finalHeader)).map(line -> {
 			String[] parts = line.split(",");
 			double[] v = new double[parts.length - 1];
 			for (int i = 0; i < parts.length - 1; i++) {
