@@ -1,6 +1,7 @@
 
 
-# BigData-HousePrediction
+
+# Lambda-BatchTraining-HousePricePredict
 
 ## *Kick-Off*
 
